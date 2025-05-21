@@ -4,14 +4,20 @@ function CookieBanner() {
   const [visible, setVisible] = useState(false);
   
   useEffect(() => {
-    const accepted = localStorage.getItem('cookiesAccepted');
-    if (!accepted) {
-      setVisible(true);
+    const stored = localStorage.getItem('cookiesAccepted');
+    if (stored) {
+      const { accepted, expiresAt } = JSON.parse(stored);
+      if (!accepted || Date.now() > expiresAt) {
+        setVisible(true); // Expired or invalid
+      }
+    } else {
+      setVisible(true); // Not stored at all
     }
   }, []);
   
   const acceptCookies = () => {
-    localStorage.setItem('cookiesAccepted', 'true');
+    const expiresAt = Date.now() + 1000 * 60; // 1 minute for testing
+    localStorage.setItem('cookiesAccepted', JSON.stringify({ accepted: true, expiresAt }));
     setVisible(false);
   };
   
