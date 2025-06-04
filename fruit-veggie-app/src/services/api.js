@@ -51,3 +51,24 @@ export const removeFromFavorites = async (produceId) => {
   const response = await api.delete(`/users/favorites/${produceId}`);
   return response.data;
 };
+
+// AI API functions
+export const generateHealthInsights = async (produceId) => {
+  try {
+    const response = await api.post(`/ai/health-insights/${produceId}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error generating health insights:', error);
+    throw error;
+  }
+};
+
+export const generateTranslations = async (produceId) => {
+  try {
+    const response = await api.post(`/ai/translate/${produceId}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error generating translations:', error);
+    throw error;
+  }
+};

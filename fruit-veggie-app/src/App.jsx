@@ -1,5 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { UserProvider } from './contexts/UserContext'; // wrapping the app with UserProvider to provide user context to all components
+import { UserProvider } from './contexts/UserContext';
+import { ComparisonProvider } from './contexts/ComparisonContext';
+import DragDropContainer from './components/DragDropContainer';
+import InstallPrompt from './components/InstallPrompt';
 import Home from './pages/Home';
 import Detail from './pages/Detail';
 import Favorites from './pages/Favorites';
@@ -12,18 +15,23 @@ function App() {
   return (
     <Router>
       <UserProvider>
-        <div className="app">
-          <Navbar />
-          <main>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/detail/:id" element={<Detail />} />
-              <Route path="/favorites" element={<Favorites />} />
-              <Route path="/login" element={<Login />} />
-            </Routes>
-          </main>
-          <CookieBanner />
-        </div>
+        <ComparisonProvider>
+          <DragDropContainer>
+            <div className="app">
+              <Navbar />
+              <main>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/detail/:id" element={<Detail />} />
+                  <Route path="/favorites" element={<Favorites />} />
+                  <Route path="/login" element={<Login />} />
+                </Routes>
+              </main>
+              <InstallPrompt />
+              <CookieBanner />
+            </div>
+          </DragDropContainer>
+        </ComparisonProvider>
       </UserProvider>
     </Router>
   );

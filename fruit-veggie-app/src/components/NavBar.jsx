@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useUser } from '../contexts/UserContext'; // Importing the UserContext to access user state
+import { useUser } from '../contexts/UserContext';
 import { logout } from '../services/api';
 
 function Navbar() {
@@ -15,20 +15,34 @@ function Navbar() {
   };
 
   return (
-    <header>
-      <nav style={{ background: '#f0f0f0', padding: '10px' }}>
-        <ul style={{ display: 'flex', listStyle: 'none', gap: '20px' }}>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/favorites">Favorites</Link></li>
+    <header className="navbar">
+      <nav className="nav-container">
+        <div className="nav-brand">
+          <Link to="/" className="brand-link">
+            <span className="brand-icon">🥬</span>
+            <span className="brand-text">ProduceApp</span>
+          </Link>
+        </div>
+        
+        <ul className="nav-menu">
+          <li><Link to="/" className="nav-link">Home</Link></li>
+          <li><Link to="/favorites" className="nav-link">Favorites</Link></li>
 
           {!loading && (
             user ? (
               <>
-                <li>Welcome, {user.name}!</li>
-                <li><button onClick={handleLogout}>Logout</button></li>
+                <li className="user-greeting">
+                  <span className="user-icon">👋</span>
+                  <span>Welcome, {user.name}!</span>
+                </li>
+                <li>
+                  <button onClick={handleLogout} className="logout-btn">
+                    Logout
+                  </button>
+                </li>
               </>
             ) : (
-              <li><Link to="/login">Login</Link></li>
+              <li><Link to="/login" className="login-link">Login</Link></li>
             )
           )}
         </ul>
