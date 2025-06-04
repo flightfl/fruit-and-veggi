@@ -1,7 +1,12 @@
 import axios from 'axios';
 
 // Frontend sends API requests to the backend server running at port: 5000
-const API_URL = 'http://localhost:5000/api';
+// const API_URL = 'http://localhost:5000/api';
+
+// Use environment-based API URL
+const API_URL = import.meta.env.PROD 
+  ? 'https://api-dot-cs144-25s-xingbo2002.uw.r.appspot.com/api'  // Production API URL
+  : 'http://localhost:5000/api';  // Development API URL
 
 // Create axios instance with credentials
 const api = axios.create({
