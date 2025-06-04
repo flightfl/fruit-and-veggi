@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 
 const nutritionSchema = new mongoose.Schema(
   {
-    calories: Number,
-    protein: Number,
-    carbs: Number,
-    fat: Number,
-    fiber: Number
+    calories: { type: Number, default: 0 },
+    protein: { type: Number, default: 0 },
+    carbs: { type: Number, default: 0 },
+    fat: { type: Number, default: 0 },
+    fiber: { type: Number, default: 0 }
   },
   { _id: false }
 );
@@ -21,7 +21,7 @@ const produceSchema = new mongoose.Schema(
     category: {
       type: String,
       required: true,
-      enum: ['fruit', 'vegetable']
+      enum: ['fruit', 'vegetable', 'other']
     },
     imageUrl: String,
     nutrition: nutritionSchema,
@@ -29,7 +29,17 @@ const produceSchema = new mongoose.Schema(
       type: Map,
       of: String
     },
-    aiInsights: [String]
+    aiInsights: [String],
+    // USDA-specific fields
+    usdaId: {
+      type: Number,
+      sparse: true // Allows multiple null values
+    },
+    dataSource: {
+      type: String,
+      enum: ['manual', 'USDA'],
+      default: 'manual'
+    }
   },
   { timestamps: true }
 );

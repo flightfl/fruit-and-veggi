@@ -28,6 +28,8 @@ app.get('/', (req, res) => {
 // Routes
 app.use('/api/produce', require('./routes/produceRoutes'));
 app.use('/api/users', require('./routes/userRoutes'));
+app.use('/api/usda', require('./routes/usdaRoutes'));
+app.use('/api/ai', require('./routes/aiRoutes'));
 
 // Connect to MongoDB and start server
 mongoose.connect(process.env.MONGODB_URI)

@@ -2,6 +2,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 // Check if Redis is enabled in .env
+// for developing purposes, I set REDIS_ENABLED to false
 const REDIS_ENABLED = process.env.REDIS_ENABLED === 'true';
 
 // Mock Redis client for when Redis is disabled
