@@ -28,6 +28,9 @@ jobs:
         
     - name: Set up Cloud SDK
       uses: google-github-actions/setup-gcloud@v1
+
+    - name: Configure App Engine deployment
+      run: gcloud config set app/use_deprecated_preparation True
         
     - name: Deploy backend to App Engine
       run: |
