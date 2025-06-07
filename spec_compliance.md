@@ -24,12 +24,11 @@ This document details how our Fruits & Vegetables Explorer project meets each re
 ### ✅ 4. HTTPS
 - **Production deployment**: All Google Cloud App Engine services use HTTPS by default
 - **Configuration**: Both `app.yaml` files specify `secure: always` for all routes
-- **Development**: Local development can use HTTP, production enforces HTTPS
 
 ### ✅ 5. Single Page Application
 - **React Router**: Client-side routing without page reloads
 - **Dynamic content loading**: All navigation handled within the SPA framework
-- **No scrolling requirements**: Content fits within viewport, pagination where needed
+- **Scrolling requirements**: Content only is scrolled within the component
 - **Location**: `src/App.jsx` with React Router configuration
 
 ### ✅ 6. Aesthetic Design
@@ -38,7 +37,7 @@ This document details how our Fruits & Vegetables Explorer project meets each re
 - **Functional over beautiful**: Prioritized meeting requirements while maintaining good UX
 
 ### ✅ 7. CSS Processing
-- **Custom CSS**: Hand-written CSS with modern features like flexbox, grid, and gradients
+- **Custom CSS**: Modern features like flexbox, grid, and gradients
 - **Organized styling**: Comprehensive styles in `src/index.css`
 - **Note**: Chose custom CSS over preprocessors for better control and learning
 
