@@ -96,6 +96,7 @@ body {
   font-size: 0.95em;
   cursor: pointer;
   transition: border-color 0.3s ease;
+  width: 100%;
 }
 
 .filter-group select:focus {
@@ -289,8 +290,15 @@ body {
 }
 
 @media (max-width: 480px) {
+  .nav-container {
+    height: auto;
+    padding: 1rem;
+  }
+
   .nav-menu {
-    gap: 10px;
+    gap: 8px;
+    display: flex;
+    flex-wrap: wrap
   }
   
   .nav-link {

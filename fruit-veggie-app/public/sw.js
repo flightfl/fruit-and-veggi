@@ -1,4 +1,4 @@
-const CACHE_NAME = 'produce-app-v1';
+const CACHE_NAME = 'produce-app-v3';
 const urlsToCache = [
   '/',
   '/static/js/bundle.js',
