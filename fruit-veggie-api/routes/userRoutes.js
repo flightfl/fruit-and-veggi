@@ -32,11 +32,22 @@ router.post('/login', async (req, res) => {
     const token = generateToken(user._id);
     
     // Set JWT as an HTTP-only cookie
+    // console.log('About to set cookie with token:', token.substring(0, 20) + '...');
+
     res.cookie('jwt', token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+      secure: true,
+      sameSite: 'none',
+      maxAge: 30 * 24 * 60 * 60 * 1000,
     });
+
+    // console.log('Cookie should be set now');
+    // res.cookie('jwt', token, {
+    //   httpOnly: true,
+    //   secure: process.env.NODE_ENV === 'production',
+    //   sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+    //   maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+    // });
     
     res.json({
       _id: user._id,

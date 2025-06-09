@@ -15,8 +15,8 @@ app.use(cors({
   origin: ['http://localhost:5173', // the deveploment frontend URL
             'https://cs144-25s-xingbo2002.uw.r.appspot.com'], // the production frontend URL
   credentials: true, // Allow cookies
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'Cookie']
 }));
 app.use(express.json());
 app.use(cookieParser());

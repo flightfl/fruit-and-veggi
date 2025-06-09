@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../services/api';
+import { useUser } from '../contexts/UserContext';
 
 function Login() {
+  const { setUser } = useUser();
   const [name, setName] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -20,8 +22,10 @@ function Login() {
       setLoading(true);
       setError(null);
       
-      await login(name);
-      navigate('/'); // Redirect to home after login
+      const userData = await login(name);
+      setUser(userData); // Update the context immediately
+
+      navigate('/favorites');
     } catch (err) {
       setError('Login failed. Please try again.');
       console.error(err);

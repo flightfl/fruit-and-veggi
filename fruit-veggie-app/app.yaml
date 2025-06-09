@@ -2,6 +2,11 @@ runtime: nodejs20
 service: default
 
 handlers:
+  - url: /(manifest\.json)
+    static_files: dist/\1
+    upload: dist/manifest\.json
+    secure: always
+    
   # Serve static files
   - url: /(.*\.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot|wasm))$
     static_files: dist/\1

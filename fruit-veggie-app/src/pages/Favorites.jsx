@@ -46,9 +46,18 @@ function Favorites() {
   return (
     <div>
       <h1>Your Favorites</h1>
+
+      {user && (
+        <div className="welcome-message">
+          <p>👋 Welcome, {user.name}! Now you can save your favorite fruits and vegetables.</p>
+        </div>
+      )}
       
       {favorites.length === 0 ? (
-        <p>You haven't added any favorites yet.</p>
+        <div>
+          <p>You haven't added any favorites yet.</p>
+          <p>Go back to <Link to="/">browse produce</Link> and click "Add to Favorites" on items you like!</p>
+        </div>
       ) : (
         <div className="produce-grid">
           {favorites.map(item => (
