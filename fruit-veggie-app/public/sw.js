@@ -1,10 +1,9 @@
-const CACHE_NAME = 'produce-app-v7';
+const CACHE_NAME = 'produce-app-v8';
 const urlsToCache = [
   '/',
   '/manifest.json',
   '/offline.html',
   '/sw.js',
-  '/vite.svg',
   '/icon-192.png',
   '/icon-512.png'
 ];
