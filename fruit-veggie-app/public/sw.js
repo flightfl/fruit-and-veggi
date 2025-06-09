@@ -1,4 +1,4 @@
-const CACHE_NAME = 'produce-app-v6';
+const CACHE_NAME = 'produce-app-v7';
 const urlsToCache = [
   '/',
   '/manifest.json',
@@ -27,49 +27,45 @@ self.addEventListener('install', (event) => {
 
 // Fetch event - cache assets dynamically
 self.addEventListener('fetch', (event) => {
-  if (event.request.url.startsWith('chrome-extension://')) return;
-  
+  // Skip chrome-extension and non-http requests
+  if (!event.request.url.startsWith('http') || 
+      event.request.url.includes('chrome-extension')) {
+    return;
+  }
+
   event.respondWith(
     caches.match(event.request)
       .then((response) => {
-        // Cache hit - return response
         if (response) {
           return response;
         }
-
-        // Check if the request scheme is supported before caching
-        if (event.request.url.startsWith('http://') || event.request.url.startsWith('https://')) {
-          // Clone the request because it's a stream
-          const fetchRequest = event.request.clone();
-
-          return fetch(fetchRequest).then(
-            (response) => {
-              // Check if we received a valid response
-              if (!response || response.status !== 200 || response.type !== 'basic') {
-                return response;
-              }
-
-              // Clone the response because it's a stream
-              const responseToCache = response.clone();
-
-              caches.open(CACHE_NAME)
-                .then((cache) => {
-                  cache.put(event.request, responseToCache);
-                });
-
-              return response;
-            } ).catch(() => {
-          // Fallback for failed network requests
-          return caches.match('/offline.html');
+        
+        return fetch(event.request).then((response) => {
+          // Cache successful responses
+          if (response.status === 200) {
+            const responseToCache = response.clone();
+            caches.open(CACHE_NAME)
+              .then((cache) => {
+                cache.put(event.request, responseToCache);
+              });
+          }
+          return response;
+        }).catch(() => {
+          // For API requests, return empty array
+          if (event.request.url.includes('/api/')) {
+            return new Response('[]', {
+              headers: { 'Content-Type': 'application/json' }
+            });
+          }
+          
+          // For navigation, show offline page
+          if (event.request.destination === 'document') {
+            return caches.match('/offline.html');
+          }
         });
-        } else {
-          // For unsupported schemes, just fetch the resource without caching
-          return fetch(event.request);
-        }
       })
   );
 });
-
 // Activate event - clean up old caches
 self.addEventListener('activate', (event) => {
   event.waitUntil(

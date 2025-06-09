@@ -31,7 +31,7 @@ function Home() {
     fetchProduce();
   }, []);
   
-  const filteredProduce = allProduce.filter(item => {
+  const filteredProduce = (allProduce || []).filter(item => {
     const matchesSearch = item.name.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesCategory = filters.category === 'all' || item.category === filters.category;
     
