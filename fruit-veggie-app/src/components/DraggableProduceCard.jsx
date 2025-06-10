@@ -32,7 +32,14 @@ function DraggableProduceCard({ produce }) {
       className={`produce-card draggable ${isDragging ? 'dragging' : ''}`}
     >
       <div className="drag-handle">⋮⋮</div>
-      <img src={produce.imageUrl} alt={produce.name} />
+      {/* <img src={produce.imageUrl} alt={produce.name} /> */}
+      <img 
+        src={produce.imageUrl || '/default-produce.png'} 
+        alt={produce.name}
+        onError={(e) => {
+          e.target.src = '/default-produce.png';
+        }}
+      />
       <h2>{produce.name}</h2>
       <p>Category: {produce.category}</p>
       <div className="nutrition-preview">

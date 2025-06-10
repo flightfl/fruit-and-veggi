@@ -119,10 +119,18 @@ function Detail() {
       <Link to="/" className="back-link">&larr; Back to all produce</Link>
       
       <div className="produce-detail">
-        <img 
+        {/* <img 
           src={produce.imageUrl} 
           alt={produce.name} 
           className="produce-detail-image"
+        /> */}
+        <img 
+          src={produce.imageUrl || '/default-produce.png'} 
+          alt={produce.name} 
+          className="produce-detail-image"
+          onError={(e) => {
+            e.target.src = '/default-produce.png';
+          }}
         />
         
         <div className="produce-detail-info">

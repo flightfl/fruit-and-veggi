@@ -68,7 +68,14 @@ function Favorites() {
         <div className="produce-grid">
           {favorites.map(item => (
             <article key={item._id} className="produce-card">
-              <img src={item.imageUrl} alt={item.name} />
+              {/* <img src={item.imageUrl} alt={item.name} /> */}
+              <img 
+                src={item.imageUrl || '/default-produce.png'} 
+                alt={item.name}
+                onError={(e) => {
+                  e.target.src = '/default-produce.png';
+                }}
+              />
               <h2>{item.name}</h2>
               <p>{item.category}</p>
               <Link to={`/detail/${item._id}`}>View Details</Link>

@@ -14,7 +14,14 @@ function ComparisonCard({ produce }) {
         ×
       </button>
       
-      <img src={produce.imageUrl} alt={produce.name} />
+      {/* <img src={produce.imageUrl} alt={produce.name} /> */}
+      <img 
+        src={produce.imageUrl || '/default-produce.png'} 
+        alt={produce.name}
+        onError={(e) => {
+          e.target.src = '/default-produce.png';
+        }}
+      />
       <h3>{produce.name}</h3>
       <div className="category-badge">{produce.category}</div>
       
