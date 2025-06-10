@@ -5,6 +5,12 @@ function InstallPrompt() {
   const [showPrompt, setShowPrompt] = useState(false);
 
   useEffect(() => {
+    // Check if user already dismissed the prompt
+    const dismissed = localStorage.getItem('installPromptDismissed');
+    if (dismissed) {
+      return; // Don't show if previously dismissed
+    }
+
     const handler = (e) => {
       e.preventDefault();
       setDeferredPrompt(e);
@@ -28,11 +34,14 @@ function InstallPrompt() {
     
     setDeferredPrompt(null);
     setShowPrompt(false);
+    localStorage.setItem('installPromptDismissed', 'true');
   };
 
   const handleDismiss = () => {
     setShowPrompt(false);
     setDeferredPrompt(null);
+    // Remember that user dismissed it
+    localStorage.setItem('installPromptDismissed', 'true');
   };
 
   if (!showPrompt) return null;

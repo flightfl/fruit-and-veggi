@@ -119,19 +119,26 @@ function Detail() {
       <Link to="/" className="back-link">&larr; Back to all produce</Link>
       
       <div className="produce-detail">
-        {/* <img 
-          src={produce.imageUrl} 
-          alt={produce.name} 
-          className="produce-detail-image"
-        /> */}
-        <img 
-          src={produce.imageUrl || '/default-produce.png'} 
-          alt={produce.name} 
-          className="produce-detail-image"
-          onError={(e) => {
-            e.target.src = '/default-produce.png';
-          }}
-        />
+        <div className="produce-image-section">
+          <img 
+            src={produce.imageUrl || '/default-produce.png'} 
+            alt={produce.name} 
+            className="produce-detail-image"
+            onError={(e) => {
+              e.target.src = '/default-produce.png';
+            }}
+          />
+              
+          {/* Actions right under image */}
+          <div className="actions">
+            <div className="favorite-action">
+              <button onClick={handleAddToFavorites} className="favorite-button">
+                Add to Favorites
+              </button>
+              {favoriteStatus && <span className="status-message">{favoriteStatus}</span>}
+            </div>
+          </div>
+        </div>
         
         <div className="produce-detail-info">
           <h1>{produce.name}</h1>
@@ -287,13 +294,6 @@ function Detail() {
               </div>
             )}
           </section>
-
-          {/* Actions */}
-          <div className="actions">
-            <button onClick={handleAddToFavorites} className="favorite-button">
-              Add to Favorites
-            </button>
-          </div>
           
           {favoriteStatus && <p className="status-message">{favoriteStatus}</p>}
         </div>

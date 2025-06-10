@@ -78,7 +78,7 @@ function Favorites() {
               />
               <h2>{item.name}</h2>
               <p>{item.category}</p>
-              <Link to={`/detail/${item._id}`}>View Details</Link>
+              <Link to={`/detail/${item._id}`} className="view-details-btn">View Details</Link>
               <button 
                 onClick={() => handleRemoveFromFavorites(item._id)}
                 className="remove-favorite"
