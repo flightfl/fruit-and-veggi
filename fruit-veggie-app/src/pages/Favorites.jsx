@@ -55,9 +55,13 @@ function Favorites() {
         </div>
       )}
       
+      {!user && (
+          <p>🔐 Log in to save your favorite items!</p>
+      )}
+
       {favorites.length === 0 ? (
         <div>
-          <p>You haven't added any favorites yet. Login to add items.</p>
+          <p>You haven't added any favorites yet.</p>
           <p>Go back to <Link to="/">browse produce</Link> and click "Add to Favorites" on items you like!</p>
         </div>
       ) : (

@@ -23,6 +23,13 @@ function Detail() {
       try {
         setLoading(true);
         const data = await getProduceById(id);
+
+        // Handle empty response (offline)
+        if (!data || Object.keys(data).length === 0) {
+          setError('This item is not available offline. Please connect to the internet to view details.');
+          return;
+        }
+
         setProduce(data);
 
         // Load existing AI data if available
