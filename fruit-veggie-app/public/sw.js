@@ -1,11 +1,12 @@
-const CACHE_NAME = 'produce-app-v18';
+const CACHE_NAME = 'produce-app-v19';
 const urlsToCache = [
   '/',
   '/manifest.json',
   '/offline.html',
   '/vite.svg',
   '/icon-192.png',
-  '/icon-512.png'
+  '/icon-512.png',
+  '/default-produce.png'
 ];
 
 // Install event
