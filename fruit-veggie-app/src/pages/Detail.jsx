@@ -77,7 +77,7 @@ function Detail() {
       await addToFavorites(id);
       setFavoriteStatus('Added to favorites!');
     } catch (err) {
-      setFavoriteStatus('Error adding to favorites, please try login in first');
+      setFavoriteStatus('Error adding to favorites, already added or please try login in first');
       console.error(err);
     }
   };
@@ -295,7 +295,7 @@ function Detail() {
             )}
           </section>
           
-          {favoriteStatus && <p className="status-message">{favoriteStatus}</p>}
+          {/* {favoriteStatus && <p className="status-message">{favoriteStatus}</p>} */}
         </div>
       </div>
     </div>
