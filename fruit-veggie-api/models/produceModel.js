@@ -37,7 +37,7 @@ const produceSchema = new mongoose.Schema(
     },
     dataSource: {
       type: String,
-      enum: ['manual', 'USDA'],
+      enum: ['manual', 'USDA', 'AI'],
       default: 'manual'
     }
   },

@@ -27,11 +27,14 @@ function DraggableProduceCard({ produce }) {
     <article
       ref={setNodeRef}
       style={style}
-      {...listeners}
-      {...attributes}
       className={`produce-card draggable ${isDragging ? 'dragging' : ''}`}
     >
-      <div className="drag-handle">⋮⋮</div>
+      <div 
+        className="drag-handle"       
+        {...listeners}
+        {...attributes}
+      >⋮⋮</div>
+      
       {/* <img src={produce.imageUrl} alt={produce.name} /> */}
       <img 
         src={produce.imageUrl || '/default-produce.png'} 

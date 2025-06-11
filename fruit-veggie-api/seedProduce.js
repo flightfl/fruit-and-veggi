@@ -1,3 +1,5 @@
+const vertexAIService = require('./services/vertexAIService');
+
 const mongoose = require('mongoose');
 const axios = require('axios');
 const dotenv = require('dotenv');
@@ -14,96 +16,86 @@ const basicProduce = {
     'cantaloupe', 'honeydew', 'papaya', 'nectarine', 'apricot',
     
     // A fruits
-    'acai', 'ackee', 'aronia', 'asian pear',
+    'acai', 'aronia', 'asian pear',
     
     // B fruits  
-    'blackberry', 'boysenberry', 'breadfruit', 'bergamot',
-    'bilberry', 'black sapote', 'buddha hand',
+    'blackberry', 'boysenberry', 'breadfruit',
+    'bilberry', 'black sapote',
     
     // C fruits
     'clementine', 'cranberry', 'currant', 'cactus pear', 'cherimoya', 
-    'cloudberry', 'calamansi', 'crabapple', 'cashew apple', 'custard apple',
+    'cloudberry', 'crabapple', 'custard apple',
     'carambola',
     
     // D fruits
     'date', 'dragon fruit', 'durian', 'damson', 'dewberry',
     
     // E fruits
-    'elderberry', 'emu apple',
+    'elderberry',
     
     // F fruits
     'fig', 'feijoa', 'finger lime',
     
     // G fruits
     'gooseberry', 'guava', 'goji berry', 'ground cherry', 'golden berry',
-    'gac fruit', 'genip', 'goumi',
     
     // H fruits
-    'huckleberry', 'horned melon', 'hala fruit', 'hackberry',
+    'huckleberry', 'horned melon',
     
     // I fruits
-    'ice cream bean', 'imbe', 'indian gooseberry',
+    'indian gooseberry',
     
     // J fruits
-    'jackfruit', 'jujube', 'jabuticaba', 'jamaican cherry', 'jambul',
+    'jackfruit', 'jujube',
     
     // K fruits
     'kumquat', 'kiwano', 'kaffir lime', 'key lime', 'kakadu plum',
-    'kei apple',
     
     // L fruits
-    'lingonberry', 'lychee', 'longan', 'loquat', 'lemon myrtle',
-    'langsat', 'lucuma', 'loganberry',
+    'lingonberry', 'lychee', 'longan', 'loquat',
+    'loganberry',
     
     // M fruits
-    'mandarin', 'melon', 'mulberry', 'mamey', 'mangosteen', 'miracle fruit', 
-    'marula', 'medlar', 'monstera', 'mountain apple', 'maypop', 'muscadine',
+    'mandarin', 'melon', 'mulberry', 'mamey', 'mangosteen', 
+    'muscadine',
     
     // N fruits
-    'noni', 'naranjilla', 'natal plum', 'nance',
+    'noni', 'naranjilla', 'natal plum',
     
     // O fruits
-    'olive', 'orange berry', 'oregon grape',
+    'olive', 'oregon grape',
     
     // P fruits
     'passion fruit', 'persimmon', 'plantain', 'pomegranate', 'pomelo', 
-    'pawpaw', 'prickly pear', 'physalis', 'pitanga', 'pulasan',
-    'pequi', 'peru cherry',
+    'pawpaw', 'prickly pear', 'physalis', 'pitanga',
     
     // Q fruits
-    'quince', 'quandong',
+    'quince',
     
     // R fruits
-    'raisin', 'rambutan', 'rose hip', 'red currant', 'rollinia',
-    'rowan berry', 'rose apple',
+    'rambutan', 'rose hip', 'red currant',
+    'rose apple',
     
     // S fruits
-    'starfruit', 'sapodilla', 'soursop', 'sugar apple', 'salak',
+    'starfruit', 'sapodilla', 'soursop', 'sugar apple',
     'surinam cherry', 'serviceberry', 'sea buckthorn',
-    'sweet lime', 'santol', 'safou',
+    'sweet lime',
     
     // T fruits
     'tangerine', 'tamarillo', 'tamarind', 'tayberry', 'tomato',
-    'tropical almond',
     
     // U fruits
-    'ugli fruit', 'umbu', 'ume', 'uvaia',
+    'ugli fruit', 'ume',
     
     // V fruits
-    'vanilla bean', 'velvet apple', 'voavanga',
+    'vanilla bean',
     
     // W fruits
-    'wood apple', 'white currant', 'white sapote', 'wampee',
-    'waterberry', 'wax apple', 'wild cherry',
-    
-    // X fruits
-    'ximenia',
+    'white currant', 'white sapote',
+    'wax apple', 'wild cherry',
     
     // Y fruits
-    'yellow passion fruit', 'yuzu', 'yangmei', 'yacon',
-    
-    // Z fruits
-    'ziziphus', 'zweigelt grape'
+    'yellow passion fruit', 'yuzu', 'yangmei', 'yacon'
   ],
   
   vegetables: [
@@ -113,97 +105,90 @@ const basicProduce = {
     'celery', 'pea', 'bean', 'squash', 'sweet potato', 'cauliflower',
     'eggplant', 'zucchini', 'radish', 'beet', 'asparagus', 'kale',
     
-    // A fruits
-    'artichoke', 'arugula', 'acorn squash', 'avocado leaves',
+    // A vegetables
+    'artichoke', 'arugula', 'acorn squash',
     
-    // B fruits  
+    // B vegetables  
     'brussels sprouts', 'bok choy', 'bamboo shoots', 'basil', 'beet greens',
     'broccoli rabe', 'butter lettuce', 'butternut squash', 'black eyed pea',
     'banana pepper', 'broccoli romanesco', 'bitter melon', 'baby corn',
     
-    // C fruits
+    // C vegetables
     'chard', 'chive', 'cilantro', 'cassava', 'celeriac', 'chicory', 
-    'chinese broccoli', 'collard greens', 'cress', 'cardoon', 'cabbage napa',
+    'chinese broccoli', 'collard greens', 'cress', 'cardoon', 'napa cabbage',
     'chili pepper', 'chinese cabbage', 'chinese spinach', 'calabash',
     
-    // D fruits
-    'daikon', 'delicata squash', 'dulse', 'dill',
+    // D vegetables
+    'daikon', 'delicata squash', 'dill',
     
-    // E fruits
+    // E vegetables
     'endive', 'edamame', 'elephant garlic', 'escarole',
     
-    // F fruits
+    // F vegetables
     'fennel', 'fava bean', 'fiddlehead fern', 'french bean',
     
-    // G fruits
+    // G vegetables
     'ginger', 'green bean', 'green onion', 'garlic scapes', 'galangal',
-    'gai lan', 'gourds',
+    'gai lan',
     
-    // H fruits
+    // H vegetables
     'hearts of palm', 'horseradish', 'hubbard squash', 'habanero pepper',
-    'herbs', 'hijiki',
     
-    // I fruits
+    // I vegetables
     'iceberg lettuce', 'italian parsley',
     
-    // J fruits
+    // J vegetables
     'jerusalem artichoke', 'jicama', 'jalapeno', 'japanese eggplant',
     
-    // K fruits
+    // K vegetables
     'kohlrabi', 'kidney bean', 'kabocha squash', 'kelp', 'komatsuna',
     
-    // L fruits
+    // L vegetables
     'leek', 'lima bean', 'lemongrass', 'lotus root', 'lamb lettuce',
     
-    // M fruits
+    // M vegetables
     'mache', 'mizuna', 'mustard greens', 'mung bean', 'marrow',
     'morel mushroom', 'malanga',
     
-    // N fruits
+    // N vegetables
     'navy bean', 'nori', 'napa cabbage', 'new potato',
     
-    // O fruits
-    'okra', 'oregano', 'oyster mushroom', 'onion pearl',
+    // O vegetables
+    'okra', 'oregano', 'oyster mushroom', 'pearl onion',
     
-    // P fruits
+    // P vegetables
     'parsley', 'parsnip', 'pumpkin', 'plantain', 'pinto bean',
     'poblano pepper', 'portobello mushroom', 'purple cabbage',
     'purple potato', 'pickling cucumber',
     
-    // Q fruits
-    'quinoa leaves',
-    
-    // R fruits
+    // R vegetables
     'radicchio', 'romaine lettuce', 'rutabaga', 'red cabbage', 'red pepper',
     'red onion', 'runner bean', 'rocket', 'ramps',
     
-    // S fruits
+    // S vegetables
     'scallion', 'snap pea', 'sorrel', 'spaghetti squash', 'swiss chard',
     'shallot', 'sage', 'serrano pepper', 'sugar snap pea', 'shiitake mushroom',
     'summer squash', 'sea beans', 'salsify', 'snow pea',
     
-    // T fruits
+    // T vegetables
     'turnip', 'taro', 'thyme', 'tomatillo', 'thai chili', 'turnip greens',
     'tuscan kale', 'tokyo turnip',
     
-    // U fruits
-    'ulluco', 'urad dal',
+    // U vegetables
+    'ulluco',
     
-    // V fruits
-    'vidalia onion', 'vermouth', 'vietnamese mint',
+    // V vegetables
+    'vidalia onion', 'vietnamese mint',
     
-    // W fruits
+    // W vegetables
     'watercress', 'water chestnut', 'wax bean', 'winter squash',
     'white bean', 'wasabi', 'wild rice', 'winged bean', 'white eggplant',
     
-    // X fruits
-    'xerophyte cactus',
-    
-    // Y fruits
+    // Y vegetables
     'yam', 'yard long bean', 'yellow squash', 'yacon', 'yellow onion',
     'yu choy',
     
-    // Z fruits
+    // Z vegetables
     'zucchini blossom'
   ]
 };
@@ -226,7 +211,7 @@ async function searchUSDAFood(foodName) {
     const response = await axios.post(`${USDA_BASE_URL}/foods/search`, {
       query: foodName,
       dataType: ['Foundation', 'SR Legacy'],
-      pageSize: 5,
+      pageSize: 10,
       requireAllWords: false
     }, {
       params: { api_key: USDA_API_KEY },
@@ -234,8 +219,39 @@ async function searchUSDAFood(foodName) {
     });
 
     if (response.data.foods && response.data.foods.length > 0) {
-      // Return the first (most relevant) result
-      return response.data.foods[0];
+      console.log(`Found ${response.data.foods.length} results for ${foodName}`);
+      
+      // First filter: Remove processed foods
+      const filtered = response.data.foods.filter(food => {
+        const desc = food.description.toLowerCase();
+        const isProcessed = desc.includes('oil') || 
+                           desc.includes('cooked') || 
+                           desc.includes('canned') ||
+                           desc.includes('dried') ||
+                           desc.includes('frozen') ||
+                           desc.includes('juice');
+        const isRaw = desc.includes('raw') || desc.includes('fresh');
+        return !isProcessed || isRaw;
+      });
+      
+      const candidates = filtered.length > 0 ? filtered : response.data.foods;
+      
+      // Second filter - Check if result actually matches what we searched for
+      const searchWords = foodName.toLowerCase().split(' ');
+      const goodMatch = candidates.find(food => {
+        const desc = food.description.toLowerCase();
+        // At least half the words from search should be in the result
+        const matchedWords = searchWords.filter(word => desc.includes(word));
+        return matchedWords.length >= Math.ceil(searchWords.length / 2);
+      });
+      
+      if (goodMatch) {
+        console.log(`Using good match: ${goodMatch.description}`);
+        return goodMatch;
+      } else {
+        console.log(`No good match found for "${foodName}" - best was "${candidates[0].description}"`);
+        return null; // Force AI fallback
+      }
     }
     return null;
   } catch (error) {
@@ -347,6 +363,54 @@ function convertUSDAToOurFormat(usdaFood, category, imageUrl, originalName) {
   };
 }
 
+async function getAINutritionData(foodName) {
+  if (!vertexAIService.isAvailable()) {
+    return null;
+  }
+
+  try {
+    console.log(`Getting AI nutrition data for ${foodName}`);
+    
+    const prompt = `Please provide nutrition information for "${foodName}" per 100g in this exact JSON format:
+    {
+      "calories": number,
+      "protein": number,
+      "carbs": number,
+      "fat": number,
+      "fiber": number
+    }
+    
+    Return only the JSON, no other text. Use typical values for raw ${foodName}.`;
+
+    // Use the model directly like in your service
+    const result = await vertexAIService.model.generateContent(prompt);
+    
+    // Extract text the same way as in your service
+    let text = '';
+    if (result.response) {
+      if (typeof result.response.text === 'function') {
+        text = result.response.text();
+      } else if (result.response.candidates && result.response.candidates.length > 0) {
+        const candidate = result.response.candidates[0];
+        if (candidate.content && candidate.content.parts && candidate.content.parts.length > 0) {
+          text = candidate.content.parts[0].text;
+        }
+      }
+    }
+    
+    // Parse JSON
+    const cleanText = text.replace(/```json|```/g, '').trim();
+    const nutrition = JSON.parse(cleanText);
+    
+    console.log(`AI nutrition for ${foodName}:`, nutrition);
+    return nutrition;
+    
+  } catch (error) {
+    console.error(`AI nutrition failed for ${foodName}:`, error);
+    return null;
+  }
+}
+
 // Process a single food item
 async function processFoodItem(foodName, category) {
   console.log(`Processing: ${foodName} (${category})`);
@@ -373,17 +437,22 @@ async function processFoodItem(foodName, category) {
       // Convert and save with clean name
       const produceData = convertUSDAToOurFormat(usdaFood, category, imageUrl, foodName);
       await Produce.create(produceData);
-      console.log(`  ✓ Added: ${produceData.name}`);
+      console.log(`  ✓ Added (USDA): ${produceData.name}`);
     } else {
-      // Create with basic data if USDA not found
+      // Fallback to AI nutrition data
+      console.log(`  USDA not found for ${foodName}, trying AI...`);
+      const aiNutrition = await getAINutritionData(foodName);
+      await delay(2000); // Longer delay for AI calls
+      
+      const cleanName = foodName.charAt(0).toUpperCase() + foodName.slice(1);
       await Produce.create({
         name: cleanName,
         category: category,
         imageUrl: imageUrl,
-        nutrition: { calories: 0, protein: 0, carbs: 0, fat: 0, fiber: 0 },
-        dataSource: 'manual'
+        nutrition: aiNutrition || { calories: 0, protein: 0, carbs: 0, fat: 0, fiber: 0 },
+        dataSource: aiNutrition ? 'AI' : 'manual'
       });
-      console.log(`  ✓ Added (manual): ${cleanName}`);
+      console.log(`  ✓ Added (${aiNutrition ? 'AI' : 'manual'}): ${cleanName}`);
     }
   } catch (error) {
     console.error(`  ✗ Error processing ${foodName}:`, error.message);
