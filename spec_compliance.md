@@ -123,9 +123,9 @@ This document details how this Fruits & Vegetables Explorer project meets modern
 - **Service Worker**: Offline caching and performance improvements
 - **Image optimization**: Responsive images from professional APIs
 
-## Deviations and Notes
+## Notes
 
-### No Deviations
+### Structures
 The project uses modern technology stack:
 - **Frontend**: React with modern JavaScript
 - **Backend**: Node.js with Express
