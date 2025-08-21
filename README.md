@@ -1,6 +1,4 @@
-# team37
-
-### Fruits & Vegetables Explorer - CS 144 Final Project
+### Fruits & Vegetables Explorer
 
 
 **Project Purpose**
