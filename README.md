@@ -1,6 +1,4 @@
-# team37
-
-### Fruits & Vegetables Explorer - CS 144 Final Project
+### Fruits & Vegetables Explorer
 
 
 **Project Purpose**
@@ -22,7 +20,7 @@ This web application serves as an educational tool for learning about fruits and
 
 ```
 git clone <repository-url>
-cd team37
+cd fruit-and-veggi
 ```
 
 **2. Backend Setup**
