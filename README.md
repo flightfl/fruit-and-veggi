@@ -1,5 +1,8 @@
 ### Fruits & Vegetables Explorer
-
+![Screenshot](images/home.png)
+![Screenshot](images/gallery.png)
+![Screenshot](images/detail.png)
+![Screenshot](images/AI_features.png)
 
 **Project Purpose**
 
